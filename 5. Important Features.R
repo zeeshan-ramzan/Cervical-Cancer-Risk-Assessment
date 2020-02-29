@@ -1,0 +1,6 @@
+library(Boruta)
+data<-read.table(file.choose(),header=T,sep=",")
+boruta_output <- Boruta(Outcome ~ ., data=na.omit(data), doTrace=2)
+boruta_signif <- names(boruta_output$finalDecision[boruta_output$finalDecision %in% c("Confirmed", "Tentative")])
+print(boruta_signif)
+plot(boruta_output, cex.axis=.7, las=2, xlab="", main="Variable Importance")
